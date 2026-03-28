@@ -1,15 +1,15 @@
 import os
-import streamlit as st
 import subprocess
+import gradio as gr
 
-# دروستکردنی نیشاندەرێکی سادە بۆ ئەوەی سێرڤەرەکە نەکوژێتەوە
-st.title("OpenClaw AI Worker 🤖")
-st.success("سکرتێرەکەت ئێستا ئۆنلاینە و ئامادەیە بۆ کارکردن!")
-st.info("تێبینی: هەر فەرمانێکت هەیە لە تێلیگرامەوە بۆی بنێرە.")
+# کارپێکردنی ئۆپن کڵاو لە پشتەوە
+subprocess.Popen(["python", "-m", "openclaw"])
 
-# کارپێکردنی ئۆپن کڵاو (وەک مۆدیوڵ)
-try:
-    # ئەمە فەرمانی سەرەکییە بۆ هەڵکردنی بۆتەکە
-    subprocess.Popen(["python", "-m", "openclaw"])
-except Exception as e:
-    st.error(f"هەڵەیەک ڕوویدا: {e}")
+# دروستکردنی ڕووکارێکی سادە بۆ ئەوەی سێرڤەرەکە بە داگیرساوی بمێنێتەوە
+def status():
+    return "سکرتێرەکەت ئێستا ئۆنلاینە و لە تێلیگرامەوە چاوەڕێی فەرمانی تۆیە!"
+
+demo = gr.Interface(fn=status, inputs=None, outputs="text", title="OpenClaw Worker")
+
+if __name__ == "__main__":
+    demo.launch()
